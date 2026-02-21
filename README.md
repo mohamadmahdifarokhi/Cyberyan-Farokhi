@@ -2,6 +2,10 @@
 
 A comprehensive Decentralized Identifier (DID) and Verifiable Credential (VC) registration system with a Node.js/Express backend and React Native frontend.
 
+## 📹 System Walkthrough
+
+https://github.com/user-attachments/assets/screencast-2026-02-21.webm
+
 ## Overview
 
 This project implements a complete identity management system featuring:
