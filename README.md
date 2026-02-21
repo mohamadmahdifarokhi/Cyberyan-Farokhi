@@ -93,7 +93,7 @@ docker-compose logs -f
 docker-compose down
 ```
 
-See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
+
 
 ### Option 2: Manual Setup
 
@@ -345,97 +345,37 @@ const API_BASE_URL = 'https://your-production-api.com';
 
 ## Deployment
 
-### 🚀 Deploy to Production (Free)
+The project can be deployed using Docker or manually on various hosting platforms.
 
-This project is ready to deploy to free hosting platforms in under 15 minutes!
+### Docker Deployment
 
-**📖 Start Here:**
-- **[Deployment Summary](./DEPLOYMENT_SUMMARY.md)** - Everything in one place ⭐
-- **[Deployment Index](./DEPLOYMENT_README.md)** - Choose your path
-- **[Platform Comparison](./PLATFORM_COMPARISON.md)** - Which platform is best?
-
-**🎯 Quick Guides:**
-- **[Quick Start (10 min)](./QUICK_START_DEPLOY.md)** - Fastest deployment
-- **[Visual Guide (15 min)](./DEPLOYMENT_VISUAL_GUIDE.md)** - Step-by-step with diagrams
-- **[Deployment Checklist](./DEPLOYMENT_CHECKLIST.md)** - Ensure nothing is missed
-
-**📚 Detailed Guides:**
-- **[Complete Guide](./DEPLOYMENT_RENDER.md)** - Detailed instructions for Render.com
-- **[Alternative Platforms](./DEPLOYMENT_ALTERNATIVES.md)** - Railway, Fly.io, Vercel, Netlify
-
-**⚡ Quick Deploy:**
-```bash
-# 1. Run deployment helper
-./deploy.sh
-
-# 2. Push to GitHub
-git push origin main
-
-# 3. Deploy on Render
-# Go to render.com → New → Blueprint → Connect repo
-```
-
-**✨ What You Get (Free):**
-- ✅ Backend API (Node.js + Express)
-- ✅ Frontend (React Native Web)
-- ✅ MongoDB Database (512MB via Atlas)
-- ✅ RabbitMQ Queue (via CloudAMQP)
-- ✅ SSL Certificate (automatic)
-- ✅ Auto-deployments from Git
-- ✅ Health monitoring
-
-**💰 Total Cost:** $0/month (free tier)
-**⏱️ Deployment Time:** 10-20 minutes
-**🎓 Difficulty:** Easy
-
-### Demo Materials
-
-### 📹 Video Demonstrations
-
-Complete demonstration materials are available to showcase all system enhancements:
-
-- **[Enhanced Demo Guide](./ENHANCED_DEMO_GUIDE.md)** - Step-by-step demonstration of all features
-- **[Visual Demo Script](./VISUAL_DEMO_SCRIPT.md)** - Recording script for video demonstrations
-- **[Feature Highlights](./FEATURE_HIGHLIGHTS.md)** - Comprehensive overview of enhancements
-- **[Demo Materials Index](./DEMO_MATERIALS_README.md)** - Complete guide to all demo resources
-
-### 🎯 Key Features Demonstrated
-
-1. **Modern UI/UX** - Gradient backgrounds, smooth animations, haptic feedback
-2. **RabbitMQ Integration** - Asynchronous message processing with retry logic
-3. **MongoDB Persistence** - Reliable data storage with encryption at rest
-4. **Enhanced Security** - Rate limiting, Helmet headers, input sanitization, biometric auth
-5. **Push Notifications** - Real-time credential updates via Firebase
-6. **Analytics Dashboard** - System metrics and health monitoring
-7. **Advanced Features** - Search, export, audit log filtering
-8. **Docker Orchestration** - Complete system deployment with one command
-
-### 📊 Performance Metrics
-
-- Registration API: ~250ms (target: < 500ms) ✅
-- Credential Retrieval: ~150ms (target: < 200ms) ✅
-- Search Query: ~75ms (target: < 100ms) ✅
-- Test Coverage: 85% with 123 tests ✅
-- Load Testing: 100 req/s sustained, 99.9% success rate ✅
-
-### 🎬 Quick Demo
+Use the provided Docker Compose files for easy deployment:
 
 ```bash
-# Start the complete system
+# Development
+docker-compose -f docker-compose.dev.yml up -d
+
+# Production
 docker-compose up -d
-
-# Access RabbitMQ Management UI
-open http://localhost:15672  # admin/password
-
-# Test the API
-curl -X POST http://localhost:3001/api/register \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Alice Johnson","email":"alice@example.com"}' | jq '.'
-
-# Run all tests
-cd backend && npm test
-cd ../frontend && npm test
 ```
+
+### Manual Deployment Options
+
+The application can be deployed to various platforms:
+
+- **Render.com** - Free tier available for Node.js apps
+- **Railway** - Simple deployment with free tier
+- **Fly.io** - Global deployment with free allowance
+- **Heroku** - Classic PaaS option
+- **Vercel/Netlify** - For frontend static builds
+
+### Deployment Steps
+
+1. Set up a Node.js hosting environment
+2. Configure environment variables (PORT, JWT_SECRET)
+3. Deploy backend and frontend separately or together
+4. Set up MongoDB and RabbitMQ instances if needed
+5. Configure SSL certificates (usually automatic on modern platforms)
 
 ## Future Enhancements
 
