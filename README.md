@@ -4,7 +4,7 @@ A comprehensive Decentralized Identifier (DID) and Verifiable Credential (VC) re
 
 ## 📹 System Walkthrough
 
-https://github.com/user-attachments/assets/screencast-2026-02-21.webm
+[Screencast from 2026-02-21 21-00-25.webm](https://github.com/user-attachments/assets/2c9a69bf-bc1d-4344-94e5-787fc676868f)
 
 ## Overview
 
