@@ -44,7 +44,6 @@ services:
     buildCommand: cd frontend && npm ci && npm run build
     staticPublishPath: ./frontend/web-build
     plan: free
-    region: oregon
     envVars:
       - key: NODE_ENV
         value: production
