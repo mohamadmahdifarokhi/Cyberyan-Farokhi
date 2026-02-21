@@ -1,0 +1,43 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 300  # 5 minutes
+      arrivalRate: 50  # 50 requests per second
+      name: "Analytics dashboard load"
+  processor: "./load-test-processor.js"
+  
+scenarios:
+  - name: "Analytics endpoint load test"
+    weight: 60
+    flow:
+      # Register to get JWT
+      - post:
+          url: "/api/register"
+          json:
+            name: "{{ $randomString() }}"
+            email: "{{ $randomString() }}@example.com"
+          capture:
+            - json: "$.data.jwt"
+              as: "jwt_token"
+      
+      # Get analytics
+      - get:
+          url: "/api/analytics"
+          headers:
+            Authorization: "Bearer {{ jwt_token }}"
+          expect:
+            - statusCode: 200
+            - contentType: json
+            - hasProperty: data.totalRegistrations
+            - hasProperty: data.registrationTrend
+  
+  - name: "Health check endpoint"
+    weight: 40
+    flow:
+      - get:
+          url: "/api/health"
+          expect:
+            - statusCode: 200
+            - contentType: json
+            - hasProperty: status
+            - hasProperty: services

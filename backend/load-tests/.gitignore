@@ -1,0 +1,12 @@
+# Artillery reports
+reports/
+*.json
+*.html
+*.log
+
+# Node modules if any
+node_modules/
+
+# Temporary files
+*.tmp
+*.temp

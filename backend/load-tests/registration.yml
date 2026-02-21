@@ -1,0 +1,26 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 300  # 5 minutes
+      arrivalRate: 100  # 100 requests per second
+      name: "Sustained load"
+  processor: "./load-test-processor.js"
+  
+scenarios:
+  - name: "Registration endpoint load test"
+    flow:
+      - post:
+          url: "/api/register"
+          json:
+            name: "{{ $randomString() }}"
+            email: "{{ $randomString() }}@example.com"
+            passportImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+            selfieImage: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+          capture:
+            - json: "$.data.jwt"
+              as: "jwt_token"
+          expect:
+            - statusCode: 201
+            - contentType: json
+            - hasProperty: data.did
+            - hasProperty: data.jwt

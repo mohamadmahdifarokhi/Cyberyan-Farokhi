@@ -1,0 +1,58 @@
+# Development Dockerfile for React Native Web
+
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Install system dependencies for native modules and sharp-cli
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    cairo-dev \
+    jpeg-dev \
+    pango-dev \
+    giflib-dev \
+    vips-dev \
+    libpng-dev \
+    libwebp-dev \
+    librsvg-dev
+
+# Install global dependencies
+RUN npm install -g expo-cli@6.3.12
+
+# Copy package files
+COPY package*.json ./
+
+# Install ALL dependencies (including dev dependencies for development)
+# Use --legacy-peer-deps to handle React 18/React Native compatibility
+RUN npm install --legacy-peer-deps
+
+# Create workaround for missing Firebase postinstall.mjs file
+RUN mkdir -p node_modules/@firebase/util/dist && \
+    echo "export {};" > node_modules/@firebase/util/dist/postinstall.mjs
+
+# Copy source code
+COPY . .
+
+# Copy and set up entrypoint script
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Set environment variables to skip problematic postinstall scripts
+ENV EXPO_NO_TYPESCRIPT_SETUP=1
+ENV SKIP_PREFLIGHT_CHECK=true
+ENV DISABLE_FIREBASE_POSTINSTALL=1
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
+# Expose ports
+EXPOSE 19006
+EXPOSE 19000
+EXPOSE 19001
+EXPOSE 8082
+
+# Set entrypoint
+ENTRYPOINT ["/entrypoint.sh"]
+
+# Start Expo web server
+CMD ["npm", "run", "web"]

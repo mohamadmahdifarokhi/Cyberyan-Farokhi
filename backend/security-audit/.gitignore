@@ -1,0 +1,15 @@
+# Security audit reports
+reports/
+*.json
+*.html
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Sensitive data (should never be here, but just in case)
+*.key
+*.pem
+*.cert
+secrets.*

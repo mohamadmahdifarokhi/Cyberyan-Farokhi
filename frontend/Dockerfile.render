@@ -1,0 +1,18 @@
+# Optimized Dockerfile for Render static deployment
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Build for web
+RUN npm run build
+
+# The web-build directory will be served as static files by Render
